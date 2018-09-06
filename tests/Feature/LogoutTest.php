@@ -19,7 +19,7 @@ class LogoutTest extends TestCase
         $token = $user->generateToken();
         $headers = ['Authorization' => "Bearer $token"];
 
-        $this->json('get','/api/articles',[],$headers)->assertStatus(200);
+        $this->json('GET','/api/articles',[],$headers)->assertStatus(200);
         $this->json('POST','/api/logout',[],$headers)->assertStatus(200);
 
         $user = User::find($user->id);
@@ -38,6 +38,6 @@ class LogoutTest extends TestCase
         $user->api_token = null;
         $user->save();
 
-        $this->json('get','/api/articles',[],$headers)->assertStatus(401);
+        $this->json('GET','/api/articles',[],$headers)->assertStatus(401);
     }
 }
